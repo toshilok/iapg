@@ -11,32 +11,68 @@ export default  class TodoApp extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            name:'Student'
-        }
+            mytodo:'',
+            list:[
+                'vote duterte',
+                'kill lagarthree'
+            ]
+        };
         //this.onChange = this.onChange.bind(this);
     }
     
 onChange(e){
     this.setState({
-        name:e.target.value
+        mytodo:e.target.value
     })
-}
+};
  
-    render(){
+ onAddItem(){
+     var listx = this.state.list;
+     listx.push(this.state.mytodo);
+     
+     this.setState({
+         list:listx
+     })
+ }
+    onKeyUp(e){
+        if(e.key==='Enter')
+        {
+             let tmp = this.state.list;
+             tmp.push(this.state.mytodo);
+             this.setState({
+                 list:tmp,
+                 mytodo:''
+             });
+        }
+        
+    }
+    
+    
+    render(){   
+        let items=[];    
+        for (var i=0;i< this.state.list.length;i++){
+           items.push(<li>{this.state.list[i]}</li>);
+        }
 
         return (
             
             <div>
-            <center><h1>Welcome to ReactJS </h1>
-                  <h1>I Love Being IT!</h1>
-                  <font color="red"><h2>{this.state.name}</h2></font>
-                  <h2><strong>Enter Your Name:</strong></h2>
-                  <form>
-                  <input type="text" onChange={this.onChange.bind(this)}/>
-                  </form>
-                  </center>
-             </div>
+            
+            <h1> My todo List </h1>
+            <input type="text" 
+            
+                    onChange={this.onChange.bind(this)}
+                    value={this.state.mytodo}
+            onKeyUp={this.onKeyUp.bind(this)}
+            />
+            
+           
+             <ol>
+             {items}
+             </ol>
+            </div>
              
-    )
+        )
     }
 }
+
