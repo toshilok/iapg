@@ -14,7 +14,7 @@
   "keywords": [
     "app"
   ],
-  "author": "iking",
+  "author": "toshi",
   "license": "ISC",
   "dependencies": {
     "react": "^15.0.1",
